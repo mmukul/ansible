@@ -1,5 +1,5 @@
-Steps to create an AWS Instance with Ansible
----------------------------------------------
+## Steps to create an AWS Instance with Ansible ##
+--------------------------------------------------
 
 1). Create dynamic inventory file through AWS EC2 External Inventory Script, 
 
@@ -14,8 +14,8 @@ Steps to create an AWS Instance with Ansible
          $ export AWS_SECRET_ACCESS_KEY='YOUR_AWS_API_SECRET_KEY'
 ~~
 
-Example
--------
+Example:
+--------
 
 [root@node1 ansible]# pwd
 /etc/ansible
