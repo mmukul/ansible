@@ -1,5 +1,4 @@
 
-#################################################################
-Description: This includes ansible stuff & ansible playbook examples
+Ansible Playbook Examples
 
 Happy Ansible learning!
