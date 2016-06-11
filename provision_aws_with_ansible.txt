@@ -1,19 +1,21 @@
 ## Steps to create an AWS Instance with Ansible ##
+--------------------------------------------------
 
 1). Create dynamic inventory file through AWS EC2 External Inventory Script, 
 
-     i). Download https://raw.github.com/ansible/ansible/devel/contrib/inventory/ec2.py and copy the script to "/etc/ansible/hosts" and chmod +x it
+    i). Download https://raw.github.com/ansible/ansible/devel/contrib/inventory/ec2.py and copy the script to "/etc/ansible/hosts" and chmod +x it
 
 2). Also, need to copy https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini to "/etc/ansible" directory. 
 
 3). To successfully make an API call to AWS, you will need to configure Boto (the Python interface to AWS) and export the two environment variables:
 
 ~~
-           export AWS_ACCESS_KEY_ID='ACTUAL_KEY'
-           export AWS_SECRET_ACCESS_KEY='ACTUAL_KEY'
+         $ export AWS_ACCESS_KEY_ID='YOUR_AWS_API_KEY'
+         $ export AWS_SECRET_ACCESS_KEY='YOUR_AWS_API_SECRET_KEY'
 ~~
 
 Example:
+--------
 
 [root@node1 ansible]# pwd
 /etc/ansible
