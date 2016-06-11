@@ -1,4 +1,4 @@
 
-Ansible Playbook Examples
+Ansible Playbook Examples:
 
 Happy Ansible learning!
