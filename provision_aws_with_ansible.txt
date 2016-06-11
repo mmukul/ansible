@@ -1,36 +1,29 @@
-## Steps to create an AWS Instance with Ansible ##
---------------------------------------------------
+## Steps to provision an AWS Instance using Ansible Playbook ##
+--------------------------------------------------------------
 
 1). Create dynamic inventory file through AWS EC2 External Inventory Script, 
 
-    i). Download https://raw.github.com/ansible/ansible/devel/contrib/inventory/ec2.py and copy the script to "/etc/ansible/hosts" and chmod +x it
+    * Download https://raw.github.com/ansible/ansible/devel/contrib/inventory/ec2.py script to "/etc/ansible" and chmod +x it
 
 2). Also, need to copy https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/ec2.ini to "/etc/ansible" directory. 
 
 3). To successfully make an API call to AWS, you will need to configure Boto (the Python interface to AWS) and export the two environment variables:
 
 ~~
-         $ export AWS_ACCESS_KEY_ID='YOUR_AWS_API_KEY'
-         $ export AWS_SECRET_ACCESS_KEY='YOUR_AWS_API_SECRET_KEY'
+    $ export AWS_ACCESS_KEY_ID='YOUR_AWS_API_KEY'
+    $ export AWS_SECRET_ACCESS_KEY='YOUR_AWS_API_SECRET_KEY'
+    $ export ANSIBLE_HOSTS=/etc/ansible/ec2.py
+    $ export EC2_INI_PATH=/etc/ansible/ec2.ini 
 ~~
 
-Example:
---------
+4). Using an SSH agent is the best way to authenticate with end nodes, as this alleviates the need to copy the .pem files around. To add an agent,
 
-[root@node1 ansible]# pwd
-/etc/ansible
+~~~
+$ ssh-agent bash 
+$ ssh-add ~/.ssh/keypair.pem 
+~~~
 
-[root@node1 ansible]# ll
-total 144
--rw-r--r--. 1 root root 10463 Apr 20 05:22 ansible.cfg
--rw-r--r--. 1 root root  8064 Jun  3 17:26 ec2.ini
--rwxr-xr-x. 1 root root 60161 Jun  9 17:03 ec2.py     <<======   Copy to hosts file and chmod +x it
-drwxr-xr-x. 2 root root    20 May 30 15:49 group_vars
--rw-r--r--. 1 root root   413 Jun  3 17:56 host.orig
--rwxr-xr-x. 1 root root 60161 Jun  9 17:13 hosts    <<====   here
-drwxr-xr-x. 2 root root     6 May 30 15:12 host_vars
-drwxr-xr-x. 3 root root    20 Jun  1 20:15 playbook
-drwxr-xr-x. 2 root root     6 Apr 20 05:22 roles
+## Steps to provision an AWS Instance using Ansible Ad hoc method ##
+--------------------------------------------------------------------
 
-[root@node1 ansible]# ./ec2.py --list
-
+$ ansible localhost -m ec2 -a "image=ami-d44b4286 ec2_region=ap-southeast-1 instance_type=m3.medium count=1  keypair=ans_mukul group=default  wait=yes" -c  local
