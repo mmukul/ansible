@@ -3,9 +3,9 @@ Ansible Playbook Examples:
 
 This repository contains examples for building Ansible Playbooks,
 
-* Provision VM with Vagrant using Ansible
+* Ansible basic example's
 
-* Privision AWS Instances with Ansible 
+* Provision VM with Vagrant using Ansible
 
 
 Happy Ansible learning!
